@@ -40,7 +40,7 @@ const Upload = () => {
     if (imageFile.error || !imageFile.file) {
       console.error("PDF conversion error:", imageFile.error);
       setStatusText(
-        `Error: ${imageFile.error || "Failed to convert PDF to Image"}`,
+        `Error: ${imageFile.error || "Failed to convert PDF to Image"}`
       );
       setIsProcessing(false);
       return;
@@ -67,7 +67,7 @@ const Upload = () => {
     setStatusText("Analyzing...");
     const feedback = await ai.feedback(
       uploadedFile.path,
-      prepareInstructions({ jobTitle, jobDescription }),
+      prepareInstructions({ jobTitle, jobDescription })
     );
     if (!feedback) return setStatusText("Error: Failed to analyze resume");
     const feedbackText =
@@ -76,9 +76,10 @@ const Upload = () => {
         : feedback.message.content[0].text;
 
     data.feedback = JSON.parse(feedbackText);
-    await kv.set(`resume: ${uuid}`, JSON.stringify(data));
+    await kv.set(`resume:${uuid}`, JSON.stringify(data));
     setStatusText("Analysis complete, redirecting...");
-    console.log(data);
+    console.log("data from /upload", data);
+    navigate(`/resume/${uuid}`);
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

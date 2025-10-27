@@ -12,7 +12,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
       const file = acceptedFiles[0] || null;
       onFileSelect?.(file);
     },
-    [onFileSelect],
+    [onFileSelect]
   );
 
   const maxFileSize = 20 * 1024 * 1024;
@@ -31,7 +31,6 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         <div className="space-y-4 cursor-pointer">
-
           {file ? (
             <div
               className="uploader-selected-file"
@@ -48,16 +47,21 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                   </p>
                 </div>
               </div>
-                <button className="p-2 cursor-pointer" onClick={(e) => {
-                    onFileSelect?.(null);
-                }}> <img src="/icons/cross.svg" alt="remove" className="w-4 h-4"/></button>
+              <button
+                className="p-2 cursor-pointer"
+                onClick={(e) => {
+                  onFileSelect?.(null);
+                }}
+              >
+                {" "}
+                <img src="/icons/cross.svg" alt="remove" className="w-4 h-4" />
+              </button>
             </div>
           ) : (
-
             <div>
-                <div className="mx-auto w-16 h-16 flex items-center justify-center mb-2">
-                    <img src="/icons/info.svg" alt="upload" className="size-20" />
-                </div>
+              <div className="mx-auto w-16 h-16 flex items-center justify-center mb-2">
+                <img src="/icons/info.svg" alt="upload" className="size-20" />
+              </div>
               <p className="text-lg text-gray-500">
                 <span className="font-semibold"> Click to upload</span> or drag
                 and drop
